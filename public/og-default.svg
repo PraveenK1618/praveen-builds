@@ -1,0 +1,61 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+>
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="10%" r="70%">
+      <stop offset="0%" stop-color="#2788ff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#07111f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#07111f"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <text
+    x="90"
+    y="225"
+    fill="#e8edf6"
+    font-family="Arial, sans-serif"
+    font-size="86"
+    font-weight="700"
+  >
+    Praveen
+  </text>
+
+  <text
+    x="425"
+    y="225"
+    fill="#55a5ff"
+    font-family="Arial, sans-serif"
+    font-size="86"
+    font-weight="700"
+  >
+    Builds
+  </text>
+
+  <text
+    x="90"
+    y="330"
+    fill="#e8edf6"
+    font-family="Arial, sans-serif"
+    font-size="52"
+    font-weight="600"
+  >
+    Building practical products.
+  </text>
+
+  <text
+    x="90"
+    y="405"
+    fill="#a9b5c8"
+    font-family="Arial, sans-serif"
+    font-size="36"
+  >
+    Electronics • Software • Automation
+  </text>
+
+  <rect x="90" y="475" width="210" height="8" rx="4" fill="#55a5ff"/>
+</svg>

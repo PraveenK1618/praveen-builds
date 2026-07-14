@@ -33,6 +33,8 @@ function formatDate(date: Date) {
 <BaseLayout
   title={`${post.data.title} | Praveen Builds`}
   description={post.data.description}
+  type="article"
+  publishedDate={post.data.pubDate}
 >
   <article class="article container">
     <a class="back-link" href="/blog">← Back to blog</a>
