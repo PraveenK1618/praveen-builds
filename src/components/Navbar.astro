@@ -1,0 +1,82 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/#contact" },
+];
+
+function isActive(href: string) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="navbar container">
+  <a class="logo" href="/" aria-label="Praveen Builds homepage">
+    Praveen<span>Builds</span>
+  </a>
+
+  <nav aria-label="Main navigation">
+    {
+      links.map((link) => (
+        <a class:list={{ active: isActive(link.href) }} href={link.href}>
+          {link.name}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .navbar {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .logo span,
+  nav a.active {
+    color: var(--accent);
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+  }
+
+  nav a {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+    transition: color 180ms ease;
+  }
+
+  nav a:hover {
+    color: white;
+  }
+
+  @media (max-width: 650px) {
+    nav {
+      gap: 18px;
+    }
+
+    nav a:nth-child(2),
+    nav a:nth-child(3),
+    nav a:nth-child(5) {
+      display: none;
+    }
+  }
+</style>
