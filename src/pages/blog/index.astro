@@ -1,17 +1,22 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const posts = [
-  {
-    title: "Why I Built FuelSave India",
-    description:
-      "The problem that inspired me to build a fuel, mileage and vehicle expense tracking application.",
-    date: "14 July 2026",
-    category: "FuelSave India",
-    readingTime: "5 min read",
-    href: "/blog/why-i-built-fuelsave-india",
-  },
-];
+const posts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
 ---
 
 <BaseLayout
@@ -31,25 +36,29 @@ const posts = [
 
   <section class="posts container">
     {
-      posts.map((post) => (
-        <article class="post-card">
-          <div class="post-meta">
-            <span>{post.category}</span>
-            <span>{post.date}</span>
-            <span>{post.readingTime}</span>
-          </div>
+      sortedPosts.length > 0 ? (
+        sortedPosts.map((post) => (
+          <article class="post-card">
+            <div class="post-meta">
+              <span>{post.data.category}</span>
+              <span>{formatDate(post.data.pubDate)}</span>
+              <span>{post.data.readingTime}</span>
+            </div>
 
-          <h2>
-            <a href={post.href}>{post.title}</a>
-          </h2>
+            <h2>
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            </h2>
 
-          <p>{post.description}</p>
+            <p>{post.data.description}</p>
 
-          <a class="read-link" href={post.href}>
-            Read article →
-          </a>
-        </article>
-      ))
+            <a class="read-link" href={`/blog/${post.id}`}>
+              Read article →
+            </a>
+          </article>
+        ))
+      ) : (
+        <p class="empty-state">No articles have been published yet.</p>
+      )
     }
   </section>
 </BaseLayout>
@@ -104,6 +113,10 @@ const posts = [
     letter-spacing: -0.035em;
   }
 
+  .post-card h2 a {
+    transition: color 180ms ease;
+  }
+
   .post-card h2 a:hover {
     color: var(--accent);
   }
@@ -118,6 +131,11 @@ const posts = [
     display: inline-block;
     margin-top: 8px;
     font-weight: 700;
+  }
+
+  .empty-state {
+    padding-block: 50px;
+    color: var(--text-secondary);
   }
 
   @media (max-width: 650px) {

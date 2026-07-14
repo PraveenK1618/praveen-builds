@@ -1,0 +1,187 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+---
+
+<BaseLayout
+  title={`${post.data.title} | Praveen Builds`}
+  description={post.data.description}
+>
+  <article class="article container">
+    <a class="back-link" href="/blog">← Back to blog</a>
+
+    <header class="article-header">
+      <p class="category">{post.data.category}</p>
+
+      <h1>{post.data.title}</h1>
+
+      <p class="intro">{post.data.description}</p>
+
+      <div class="metadata">
+        <span>{post.data.author}</span>
+        <span>{formatDate(post.data.pubDate)}</span>
+        <span>{post.data.readingTime}</span>
+      </div>
+    </header>
+
+    <div class="article-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    max-width: 900px;
+    padding-block: 75px 110px;
+  }
+
+  .back-link,
+  .category {
+    color: var(--accent);
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .article-header {
+    padding-block: 50px 55px;
+    border-bottom: 1px solid #18283d;
+  }
+
+  .category {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 850px;
+    margin: 16px 0 24px;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+
+  .intro {
+    max-width: 760px;
+    color: #b0bdce;
+    font-size: 1.2rem;
+    line-height: 1.75;
+  }
+
+  .metadata {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .article-content {
+    max-width: 740px;
+    padding-top: 55px;
+  }
+
+  .article-content :global(h2) {
+    margin: 55px 0 18px;
+    font-size: 2rem;
+    letter-spacing: -0.035em;
+  }
+
+  .article-content :global(h3) {
+    margin: 40px 0 15px;
+    font-size: 1.45rem;
+  }
+
+  .article-content :global(p),
+  .article-content :global(li) {
+    color: #b0bdce;
+    font-size: 1.07rem;
+    line-height: 1.85;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 9px;
+  }
+
+  .article-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .article-content :global(blockquote) {
+    margin: 35px 0;
+    padding: 22px 26px;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-small) var(--radius-small) 0;
+    background: var(--surface);
+  }
+
+  .article-content :global(blockquote p) {
+    margin: 0;
+  }
+
+  .article-content :global(code) {
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: var(--surface-light);
+    font-size: 0.92em;
+  }
+
+  .article-content :global(pre) {
+    overflow-x: auto;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-medium);
+    background: #050c16;
+  }
+
+  .article-content :global(pre code) {
+    padding: 0;
+    background: transparent;
+  }
+
+  @media (max-width: 600px) {
+    .article {
+      padding-top: 50px;
+    }
+
+    .article-header {
+      padding-top: 40px;
+    }
+  }
+</style>
