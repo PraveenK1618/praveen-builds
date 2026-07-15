@@ -1,0 +1,532 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    number: "01",
+    title: "FuelSave India",
+    type: "Mobile Product",
+    status: "Active Development",
+    description:
+      "A Flutter application that helps vehicle owners track fuel expenses, mileage, running cost, savings and vehicle-wise performance.",
+    problem:
+      "Most vehicle owners know how much they pay for fuel but do not clearly understand mileage trends, cost per kilometre or monthly vehicle expenses.",
+    solution:
+      "FuelSave India converts fuel entries and odometer readings into simple analytics that help users understand their vehicle usage.",
+    technologies: [
+      "Flutter",
+      "Dart",
+      "SQLite",
+      "Material 3",
+      "Local Backup",
+      "Analytics",
+    ],
+    highlights: [
+      "Multiple vehicle support",
+      "Mileage and cost-per-kilometre calculation",
+      "Monthly and lifetime analytics",
+      "Fuel history and editing",
+      "Backup and restore",
+      "Petrol, diesel and CNG support",
+    ],
+    href: "/blog/why-i-built-fuelsave-india",
+  },
+  {
+    number: "02",
+    title: "Vision-Based Component Sorting System",
+    type: "Computer Vision and Embedded Systems",
+    status: "Project Internship",
+    description:
+      "An automated system for detecting the orientation of electronic components and controlling a pick-and-place mechanism.",
+    problem:
+      "Electronic components must be accurately identified and oriented before automated placement or sorting.",
+    solution:
+      "The system uses a camera and OpenCV for orientation detection, while an STM32-based motion platform handles movement and sorting.",
+    technologies: [
+      "OpenCV",
+      "Python",
+      "STM32 Nucleo F446RE",
+      "DRV8825",
+      "NEMA17",
+      "Tkinter",
+      "grblHAL",
+    ],
+    highlights: [
+      "High-accuracy orientation detection",
+      "Shape and angle analysis",
+      "Custom desktop control interface",
+      "Four-axis stepper motor control",
+      "Vacuum-nozzle pick-and-place mechanism",
+      "Developed during SCL Mohali internship",
+    ],
+    href: "/about",
+  },
+  {
+    number: "03",
+    title: "PLC Pick and Place Machine",
+    type: "Industrial Automation",
+    status: "Completed",
+    description:
+      "A practical automation project developed while learning industrial electronics and control systems at ENS Engineering Technology.",
+    problem:
+      "Industrial production systems require reliable control of repetitive movement and material-handling tasks.",
+    solution:
+      "The system used PLC logic, motor control and pneumatic components to automate a pick-and-place sequence.",
+    technologies: [
+      "PLC",
+      "Stepper Motors",
+      "Servo Motors",
+      "Relays",
+      "Contactors",
+      "Pneumatics",
+    ],
+    highlights: [
+      "PLC sequence development",
+      "Industrial panel components",
+      "Motor and driver integration",
+      "Relay and contactor operation",
+      "Solenoid valve control",
+      "Practical industrial wiring exposure",
+    ],
+    href: "/about",
+  },
+];
+
+const experiments = [
+  {
+    title: "OBD-II Fuel Automation",
+    description:
+      "Exploring automatic vehicle and fuel-data collection for FuelSave India.",
+    status: "Researching",
+  },
+  {
+    title: "Praveen Dock",
+    description:
+      "Repurposing an older Android phone as a compact productivity and monitoring dashboard.",
+    status: "Planned",
+  },
+  {
+    title: "Embedded AI Experiments",
+    description:
+      "Exploring computer vision and intelligent automation on embedded platforms.",
+    status: "Future",
+  },
+];
+---
+
+<BaseLayout
+  title="Projects | Praveen Builds"
+  description="Explore projects by Praveen Kumar across Flutter, electronics, embedded systems, computer vision and industrial automation."
+>
+  <section class="projects-hero container">
+    <p class="section-label">Project laboratory</p>
+
+    <h1>
+      Ideas converted into
+      <span>working systems.</span>
+    </h1>
+
+    <p>
+      These projects represent my practical learning across software,
+      electronics, computer vision, embedded systems and industrial automation.
+    </p>
+  </section>
+
+  <section class="projects container">
+    {
+      projects.map((project) => (
+        <article class="project">
+          <div class="project-index">
+            <span>{project.number}</span>
+            <span class:list={["status", { active: project.status === "Active Development" }]}>
+              {project.status}
+            </span>
+          </div>
+
+          <div class="project-heading">
+            <p>{project.type}</p>
+            <h2>{project.title}</h2>
+            <p class="project-description">{project.description}</p>
+          </div>
+
+          <div class="project-details">
+            <div>
+              <h3>The problem</h3>
+              <p>{project.problem}</p>
+            </div>
+
+            <div>
+              <h3>The solution</h3>
+              <p>{project.solution}</p>
+            </div>
+          </div>
+
+          <div class="project-bottom">
+            <div>
+              <h3>Technology</h3>
+
+              <div class="tags">
+                {project.technologies.map((technology) => (
+                  <span>{technology}</span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>Highlights</h3>
+
+              <ul>
+                {project.highlights.map((highlight) => (
+                  <li>
+                    <span>↗</span>
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <a class="project-link" href={project.href}>
+            Learn more
+            <span>↗</span>
+          </a>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="section experiments-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Research and experiments</p>
+
+          <h2 class="section-title">
+            Ideas I am exploring beyond completed projects.
+          </h2>
+        </div>
+
+        <p>
+          Some projects begin as questions. This section tracks concepts,
+          prototypes and areas I may develop further.
+        </p>
+      </div>
+
+      <div class="experiments-grid">
+        {
+          experiments.map((experiment) => (
+            <article>
+              <span>{experiment.status}</span>
+              <h3>{experiment.title}</h3>
+              <p>{experiment.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="project-contact container">
+    <div>
+      <p class="section-label">Collaboration</p>
+
+      <h2>
+        Interested in discussing an engineering project or product idea?
+      </h2>
+
+      <p>
+        I am open to engineering roles, technical collaborations and practical
+        product-development opportunities.
+      </p>
+    </div>
+
+    <a class="primary-button" href="/#contact">
+      Let's connect
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-hero {
+    padding-block: 120px 105px;
+  }
+
+  .projects-hero h1 {
+    max-width: 950px;
+    margin: 18px 0 30px;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.94;
+    letter-spacing: -0.075em;
+  }
+
+  .projects-hero h1 span {
+    display: block;
+    color: transparent;
+    background: linear-gradient(100deg, #55a5ff, #5eead4);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .projects-hero > p:last-child {
+    max-width: 740px;
+    color: var(--text-secondary);
+    font-size: 1.12rem;
+    line-height: 1.85;
+  }
+
+  .projects {
+    padding-bottom: 110px;
+  }
+
+  .project {
+    margin-bottom: 34px;
+    padding: 42px;
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    background:
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(39, 136, 255, 0.1),
+        transparent 32%
+      ),
+      rgba(11, 18, 32, 0.72);
+  }
+
+  .project-index {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .project-index > span:first-child {
+    color: #41506a;
+    font-family: monospace;
+  }
+
+  .status {
+    padding: 7px 11px;
+    border: 1px solid #29384c;
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .status.active {
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #8ce4bd;
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  .project-heading {
+    max-width: 850px;
+    margin-top: 60px;
+  }
+
+  .project-heading > p:first-child {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-heading h2 {
+    margin: 12px 0 18px;
+    font-size: clamp(2.3rem, 5vw, 4.6rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .project-description {
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+    line-height: 1.8;
+  }
+
+  .project-details,
+  .project-bottom {
+    margin-top: 55px;
+    padding-top: 38px;
+    border-top: 1px solid #1b2a40;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 65px;
+  }
+
+  .project h3 {
+    margin: 0 0 14px;
+    font-size: 0.78rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .project-details p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tags span {
+    padding: 8px 11px;
+    border: 1px solid #26374e;
+    border-radius: 8px;
+    color: #b8c7da;
+    background: rgba(5, 8, 22, 0.5);
+    font-size: 0.77rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 8px 0;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 10px;
+  }
+
+  li span {
+    color: var(--accent);
+  }
+
+  .project-link {
+    margin-top: 45px;
+    padding-top: 25px;
+    border-top: 1px solid #1b2a40;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+
+  .experiments-section {
+    background: rgba(5, 8, 22, 0.48);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 430px);
+    align-items: end;
+    gap: 60px;
+  }
+
+  .section-heading > p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .experiments-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .experiments-grid article {
+    min-height: 260px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(11, 18, 32, 0.68);
+  }
+
+  .experiments-grid span {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .experiments-grid h3 {
+    margin: 55px 0 14px;
+    font-size: 1.45rem;
+    letter-spacing: -0.035em;
+  }
+
+  .experiments-grid p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  .project-contact {
+    margin-block: 70px 110px;
+    padding: 60px;
+    border: 1px solid rgba(85, 165, 255, 0.22);
+    border-radius: 28px;
+    background:
+      linear-gradient(
+        120deg,
+        rgba(39, 136, 255, 0.12),
+        rgba(6, 182, 212, 0.04)
+      ),
+      var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+  }
+
+  .project-contact h2 {
+    max-width: 800px;
+    margin: 14px 0 18px;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+  }
+
+  .project-contact p:not(.section-label) {
+    max-width: 760px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 900px) {
+    .projects-hero {
+      padding-block: 80px;
+    }
+
+    .project-details,
+    .project-bottom,
+    .section-heading {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .experiments-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-contact {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects-hero h1 {
+      font-size: clamp(3.1rem, 15vw, 4.8rem);
+    }
+
+    .project {
+      padding: 28px 22px;
+    }
+
+    .project-heading {
+      margin-top: 40px;
+    }
+
+    .project-contact {
+      padding: 35px 24px;
+    }
+  }
+</style>
