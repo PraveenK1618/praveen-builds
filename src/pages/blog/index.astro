@@ -10,6 +10,10 @@ const sortedPosts = posts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const [featuredPost, ...remainingPosts] = sortedPosts;
+
+const categories = [...new Set(sortedPosts.map((post) => post.data.category))];
+
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-IN", {
     day: "numeric",
@@ -21,126 +25,670 @@ function formatDate(date: Date) {
 
 <BaseLayout
   title="Blog | Praveen Builds"
-  description="Articles by Praveen Kumar about Flutter, electronics, embedded systems, automation and building FuelSave India."
+  description="Practical articles by Praveen Kumar about Flutter, electronics, embedded systems, automation, internships and product building."
 >
-  <section class="blog-header container">
-    <p class="section-label">The blog</p>
+  <section class="blog-hero container">
+    <div>
+      <p class="section-label">Praveen Builds Journal</p>
 
-    <h1>Learning by building.</h1>
+      <h1>
+        Lessons from building,
+        <span>testing and learning.</span>
+      </h1>
 
-    <p>
-      Practical lessons from my projects in software, electronics, computer
-      vision and automation.
-    </p>
+      <p>
+        Practical notes from my work across Flutter, electronics, embedded
+        systems, computer vision, automation and product development.
+      </p>
+    </div>
+
+    <div class="blog-summary">
+      <div>
+        <strong>{sortedPosts.length}</strong>
+        <span>Published articles</span>
+      </div>
+
+      <div>
+        <strong>{categories.length}</strong>
+        <span>Topics explored</span>
+      </div>
+    </div>
   </section>
 
-  <section class="posts container">
-    {
-      sortedPosts.length > 0 ? (
-        sortedPosts.map((post) => (
-          <article class="post-card">
+  {
+    featuredPost && (
+      <section class="featured-section container">
+        <p class="section-label">Featured article</p>
+
+        <article class="featured-card">
+          <div class="featured-visual">
+            <div class="visual-grid"></div>
+
+            <div class="visual-content">
+              <span>{featuredPost.data.category}</span>
+
+              <strong>
+                Building useful products from real problems.
+              </strong>
+            </div>
+          </div>
+
+          <div class="featured-content">
             <div class="post-meta">
-              <span>{post.data.category}</span>
-              <span>{formatDate(post.data.pubDate)}</span>
-              <span>{post.data.readingTime}</span>
+              <span>{featuredPost.data.category}</span>
+              <span>{formatDate(featuredPost.data.pubDate)}</span>
+              <span>{featuredPost.data.readingTime}</span>
             </div>
 
-            <h2>
-              <a href={`/blog/${post.id}`}>{post.data.title}</a>
-            </h2>
+            <h2>{featuredPost.data.title}</h2>
 
-            <p>{post.data.description}</p>
+            <p>{featuredPost.data.description}</p>
 
-            <a class="read-link" href={`/blog/${post.id}`}>
-              Read article →
+            <a
+              class="primary-button"
+              href={`/blog/${featuredPost.id}`}
+            >
+              Read featured article
+              <span aria-hidden="true">↗</span>
             </a>
-          </article>
-        ))
+          </div>
+        </article>
+      </section>
+    )
+  }
+
+  <section class="articles-section container">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">All writing</p>
+
+        <h2>Explore the complete journal.</h2>
+      </div>
+
+      <div class="categories" aria-label="Article categories">
+        {
+          categories.map((category) => (
+            <span>{category}</span>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      remainingPosts.length > 0 ? (
+        <div class="articles-grid">
+          {remainingPosts.map((post, index) => (
+            <article class:list={["article-card", { large: index === 0 }]}>
+              <div class="article-number">
+                {String(index + 2).padStart(2, "0")}
+              </div>
+
+              <div class="post-meta">
+                <span>{post.data.category}</span>
+                <span>{formatDate(post.data.pubDate)}</span>
+              </div>
+
+              <h3>
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              </h3>
+
+              <p>{post.data.description}</p>
+
+              <div class="article-footer">
+                <span>{post.data.readingTime}</span>
+
+                <a href={`/blog/${post.id}`}>
+                  Read article ↗
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
       ) : (
-        <p class="empty-state">No articles have been published yet.</p>
+        <div class="empty-state">
+          <p>
+            More engineering articles are being prepared. The next article will
+            appear here automatically when a new Markdown file is published.
+          </p>
+        </div>
       )
     }
+  </section>
+
+  <section class="topics-section">
+    <div class="container topics-content">
+      <div>
+        <p class="section-label">What I write about</p>
+
+        <h2>
+          Practical engineering knowledge grounded in real projects.
+        </h2>
+      </div>
+
+      <div class="topics-grid">
+        <article>
+          <span>01</span>
+          <h3>Product Building</h3>
+          <p>
+            Decisions, mistakes and lessons from building FuelSave India and
+            future products.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <h3>Embedded Systems</h3>
+          <p>
+            STM32, motors, controllers, motion systems and practical hardware
+            integration.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <h3>Computer Vision</h3>
+          <p>
+            OpenCV, image processing, orientation detection and automation
+            experiments.
+          </p>
+        </article>
+
+        <article>
+          <span>04</span>
+          <h3>Engineering Career</h3>
+          <p>
+            Internship experiences, project learning and lessons for
+            electronics students.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter container">
+    <div>
+      <p class="section-label">Follow the journey</p>
+
+      <h2>New projects create new lessons.</h2>
+
+      <p>
+        Follow Praveen Builds through LinkedIn, GitHub or the RSS feed to see
+        new articles and project updates.
+      </p>
+    </div>
+
+    <div class="newsletter-actions">
+      <a class="primary-button" href="/rss.xml">
+        Open RSS feed
+      </a>
+
+      <a
+        class="secondary-button"
+        href="https://github.com/PraveenK1618"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Follow on GitHub
+      </a>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .blog-header {
-    max-width: 1080px;
-    padding-block: 110px 75px;
+  .blog-hero {
+    min-height: 600px;
+    padding-block: 120px 90px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: end;
+    gap: 80px;
   }
 
-  .blog-header h1 {
-    margin: 16px 0 24px;
-    font-size: clamp(3rem, 7vw, 5.6rem);
-    line-height: 0.98;
-    letter-spacing: -0.06em;
+  .blog-hero h1 {
+    max-width: 900px;
+    margin: 18px 0 30px;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.94;
+    letter-spacing: -0.075em;
   }
 
-  .blog-header > p:last-child {
-    max-width: 680px;
+  .blog-hero h1 span {
+    display: block;
+    color: transparent;
+    background: linear-gradient(100deg, #55a5ff, #5eead4);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .blog-hero > div:first-child > p:last-child {
+    max-width: 750px;
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1.12rem;
+    line-height: 1.85;
   }
 
-  .posts {
-    padding-block: 25px 110px;
-    border-top: 1px solid #142238;
+  .blog-summary {
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(11, 18, 32, 0.7);
   }
 
-  .post-card {
-    padding-block: 38px;
-    border-bottom: 1px solid #142238;
+  .blog-summary div {
+    padding: 18px 0;
+    border-bottom: 1px solid #1b2a40;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-summary div:last-child {
+    border-bottom: 0;
+  }
+
+  .blog-summary strong {
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+  }
+
+  .blog-summary span {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .featured-section {
+    padding-bottom: 110px;
+  }
+
+  .featured-card {
+    margin-top: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(85, 165, 255, 0.24);
+    border-radius: 26px;
+    background: rgba(11, 18, 32, 0.78);
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .featured-visual {
+    position: relative;
+    min-height: 450px;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 70% 30%,
+        rgba(6, 182, 212, 0.28),
+        transparent 35%
+      ),
+      linear-gradient(145deg, #091426, #050816);
+  }
+
+  .visual-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.25;
+    background-image:
+      linear-gradient(rgba(85, 165, 255, 0.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(85, 165, 255, 0.11) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+
+  .visual-content {
+    position: absolute;
+    inset: auto 35px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .visual-content span {
+    color: #67e8f9;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .visual-content strong {
+    max-width: 380px;
+    font-size: 2.1rem;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+  }
+
+  .featured-content {
+    padding: 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .post-meta {
+    color: var(--text-muted);
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
+    font-size: 0.77rem;
+  }
+
+  .post-meta span:first-child {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .featured-content h2 {
+    margin: 22px 0 18px;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .featured-content > p {
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .featured-content .primary-button {
+    align-self: flex-start;
+  }
+
+  .articles-section {
+    padding-block: 110px;
+    border-top: 1px solid #142238;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 50px;
+  }
+
+  .section-heading h2 {
+    max-width: 700px;
+    margin: 14px 0 0;
+    font-size: clamp(2.4rem, 5vw, 4.3rem);
+    line-height: 1.04;
+    letter-spacing: -0.055em;
+  }
+
+  .categories {
+    max-width: 420px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 9px;
+  }
+
+  .categories span {
+    padding: 7px 10px;
+    border: 1px solid #26374e;
+    border-radius: 999px;
     color: var(--text-muted);
-    font-size: 0.82rem;
+    font-size: 0.72rem;
   }
 
-  .post-meta span:first-child,
-  .read-link {
+  .articles-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .article-card {
+    min-height: 360px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(11, 18, 32, 0.66);
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .article-card:hover {
+    border-color: rgba(85, 165, 255, 0.5);
+    transform: translateY(-5px);
+  }
+
+  .article-card.large {
+    grid-column: span 2;
+  }
+
+  .article-number {
+    margin-bottom: 35px;
+    color: #41506a;
+    font-family: monospace;
+    font-size: 0.78rem;
+  }
+
+  .article-card h3 {
+    max-width: 750px;
+    margin: 24px 0 15px;
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+  }
+
+  .article-card h3 a:hover {
     color: var(--accent);
   }
 
-  .post-card h2 {
-    max-width: 760px;
-    margin: 15px 0 12px;
-    font-size: clamp(1.7rem, 4vw, 2.5rem);
-    letter-spacing: -0.035em;
-  }
-
-  .post-card h2 a {
-    transition: color 180ms ease;
-  }
-
-  .post-card h2 a:hover {
-    color: var(--accent);
-  }
-
-  .post-card > p {
+  .article-card > p {
     max-width: 720px;
     color: var(--text-secondary);
     line-height: 1.75;
   }
 
-  .read-link {
-    display: inline-block;
-    margin-top: 8px;
+  .article-footer {
+    margin-top: auto;
+    padding-top: 30px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 0.78rem;
+  }
+
+  .article-footer a {
+    color: var(--accent);
     font-weight: 700;
   }
 
   .empty-state {
-    padding-block: 50px;
+    margin-top: 60px;
+    padding: 45px;
+    border: 1px dashed #26374e;
+    border-radius: 20px;
     color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .topics-section {
+    padding-block: 110px;
+    border-top: 1px solid #142238;
+    background: rgba(5, 8, 22, 0.5);
+  }
+
+  .topics-content {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 90px;
+  }
+
+  .topics-content > div:first-child h2 {
+    margin: 14px 0 0;
+    font-size: clamp(2.3rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .topics-grid article {
+    min-height: 230px;
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(11, 18, 32, 0.62);
+  }
+
+  .topics-grid article > span {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.72rem;
+  }
+
+  .topics-grid h3 {
+    margin: 45px 0 12px;
+    font-size: 1.3rem;
+  }
+
+  .topics-grid p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .newsletter {
+    margin-block: 70px 110px;
+    padding: 60px;
+    border: 1px solid rgba(85, 165, 255, 0.22);
+    border-radius: 28px;
+    background:
+      linear-gradient(
+        120deg,
+        rgba(39, 136, 255, 0.12),
+        rgba(6, 182, 212, 0.04)
+      ),
+      var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+  }
+
+  .newsletter h2 {
+    margin: 14px 0 17px;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+  }
+
+  .newsletter p:not(.section-label) {
+    max-width: 700px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .newsletter-actions {
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .blog-hero,
+    .featured-card,
+    .topics-content {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-hero {
+      min-height: auto;
+      padding-block: 80px;
+    }
+
+    .blog-summary {
+      max-width: 500px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .blog-summary div {
+      padding: 10px 20px;
+      border-right: 1px solid #1b2a40;
+      border-bottom: 0;
+    }
+
+    .blog-summary div:last-child {
+      border-right: 0;
+    }
+
+    .featured-visual {
+      min-height: 330px;
+    }
+
+    .section-heading,
+    .newsletter {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .categories {
+      justify-content: flex-start;
+    }
+
+    .newsletter-actions {
+      width: 100%;
+      flex-direction: row;
+    }
   }
 
   @media (max-width: 650px) {
-    .blog-header {
-      padding-block: 75px 55px;
+    .blog-hero h1 {
+      font-size: clamp(3rem, 15vw, 4.8rem);
+    }
+
+    .featured-content {
+      padding: 34px 24px;
+    }
+
+    .featured-content .primary-button {
+      width: 100%;
+    }
+
+    .articles-grid,
+    .topics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .article-card.large {
+      grid-column: auto;
+    }
+
+    .newsletter {
+      padding: 35px 24px;
+    }
+
+    .newsletter-actions {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .blog-summary {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-summary div {
+      border-right: 0;
+      border-bottom: 1px solid #1b2a40;
+    }
+
+    .visual-content {
+      inset: auto 22px 24px;
+    }
+
+    .visual-content strong {
+      font-size: 1.65rem;
     }
   }
 </style>
