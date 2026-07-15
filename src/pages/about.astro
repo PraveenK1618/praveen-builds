@@ -1,0 +1,568 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experience = [
+  {
+    period: "April 2024 – October 2024",
+    role: "Graphic Designer",
+    organisation: "E-Cell UIET KUK",
+    description:
+      "Created visual communication, promotional graphics and event-related design assets for entrepreneurship initiatives.",
+  },
+  {
+    period: "July 2024 – August 2024",
+    role: "Electronic Engineering Intern",
+    organisation: "ENS Engineering Technology",
+    description:
+      "Worked with PLC panels, relays, stepper and servo motors, drivers, industrial wiring and a pick-and-place automation system.",
+  },
+  {
+    period: "October 2024 – October 2025",
+    role: "Design Lead",
+    organisation: "E-Cell UIET KUK",
+    description:
+      "Led the design team, supervised visual communication and coordinated creative work for events and public-facing activities.",
+  },
+  {
+    period: "July 2025 – August 2025",
+    role: "Onsite Engineer Intern",
+    organisation: "Echelon Edge Pvt. Ltd.",
+    description:
+      "Gained professional onsite engineering exposure and practical experience in a technology-driven work environment.",
+  },
+  {
+    period: "January 2026 – May 2026",
+    role: "Project Intern",
+    organisation: "Semiconductor Laboratory, Mohali",
+    description:
+      "Worked on vision-based orientation detection and automated sorting of electronic components using OpenCV, STM32 and motion control.",
+  },
+  {
+    period: "June 2026 – Present",
+    role: "Founder and Developer",
+    organisation: "FuelSave India",
+    description:
+      "Building a Flutter application for fuel tracking, mileage analysis, vehicle expenses, savings and smarter vehicle ownership.",
+  },
+];
+
+const skills = [
+  "Flutter",
+  "Dart",
+  "Python",
+  "OpenCV",
+  "STM32",
+  "Embedded Systems",
+  "PLC Automation",
+  "SQLite",
+  "Git and GitHub",
+  "Industrial Automation",
+  "UI Design",
+  "Product Development",
+];
+
+const principles = [
+  {
+    title: "Build practically",
+    description:
+      "I prefer turning ideas into working systems instead of keeping them limited to theory.",
+  },
+  {
+    title: "Learn through implementation",
+    description:
+      "Most of my strongest learning has come from debugging, experimentation and completing real projects.",
+  },
+  {
+    title: "Solve meaningful problems",
+    description:
+      "I am most interested in products that improve everyday work, engineering processes or user decisions.",
+  },
+];
+---
+
+<BaseLayout
+  title="About Praveen Kumar | Praveen Builds"
+  description="Learn about Praveen Kumar's journey across electronics engineering, software development, automation, design leadership and product building."
+>
+  <section class="about-hero container">
+    <div class="about-copy">
+      <p class="section-label">About me</p>
+
+      <h1>
+        Engineer by education.
+        <span>Builder by mindset.</span>
+      </h1>
+
+      <p class="about-intro">
+        I'm Praveen Kumar, an Electronics and Communication Engineering
+        student at UIET Kurukshetra University. My work sits at the intersection
+        of electronics, software, automation, computer vision and practical
+        product development.
+      </p>
+
+      <p>
+        I have worked across industrial automation, onsite engineering,
+        embedded systems, visual design and team leadership. Today, I am
+        building FuelSave India while documenting the lessons, challenges and
+        decisions behind my work.
+      </p>
+
+      <div class="about-actions">
+        <a class="primary-button" href="/#projects">View my projects</a>
+        <a class="secondary-button" href="/blog">Read my articles</a>
+      </div>
+    </div>
+
+    <aside class="profile-card">
+      <div class="profile-header">
+        <span class="status-dot"></span>
+        Currently building
+      </div>
+
+      <h2>FuelSave India</h2>
+
+      <p>
+        A practical vehicle fuel, mileage and expense-tracking product built
+        using Flutter and SQLite.
+      </p>
+
+      <dl>
+        <div>
+          <dt>Field</dt>
+          <dd>Electronics and Communication Engineering</dd>
+        </div>
+
+        <div>
+          <dt>Focus</dt>
+          <dd>Embedded systems, software and automation</dd>
+        </div>
+
+        <div>
+          <dt>Current role</dt>
+          <dd>Student engineer and product builder</dd>
+        </div>
+
+        <div>
+          <dt>Location</dt>
+          <dd>India</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section container">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">My approach</p>
+
+        <h2 class="section-title">
+          I learn best by building systems that have a real purpose.
+        </h2>
+      </div>
+
+      <p class="section-description">
+        My projects are not isolated classroom exercises. Each one has helped
+        me understand how software, electronics, mechanics, interfaces and user
+        needs come together in a complete system.
+      </p>
+    </div>
+
+    <div class="principles-grid">
+      {
+        principles.map((principle, index) => (
+          <article class="principle-card">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{principle.title}</h3>
+            <p>{principle.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section experience-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Experience</p>
+
+          <h2 class="section-title">
+            A journey across engineering, creativity and leadership.
+          </h2>
+        </div>
+
+        <p class="section-description">
+          My experience has gradually moved from visual communication and
+          industrial automation toward embedded systems and complete product
+          development.
+        </p>
+      </div>
+
+      <div class="experience-list">
+        {
+          experience.map((item) => (
+            <article class="experience-item">
+              <div class="experience-period">{item.period}</div>
+
+              <div class="experience-main">
+                <h3>{item.role}</h3>
+                <h4>{item.organisation}</h4>
+              </div>
+
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Skills and tools</p>
+
+        <h2 class="section-title">
+          Technologies I use to turn ideas into working systems.
+        </h2>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+      {
+        skills.map((skill) => (
+          <span>{skill}</span>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="future container">
+    <div>
+      <p class="section-label">What comes next</p>
+
+      <h2>
+        I want to keep building products that combine engineering with
+        meaningful user problems.
+      </h2>
+
+      <p>
+        My long-term goal is to grow across embedded systems, product
+        development, automation and technology entrepreneurship while sharing
+        practical knowledge through Praveen Builds.
+      </p>
+    </div>
+
+    <a class="primary-button" href="/#contact">
+      Connect with me
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    min-height: 720px;
+    padding-block: 110px 100px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    align-items: center;
+    gap: 90px;
+  }
+
+  h1 {
+    max-width: 850px;
+    margin: 18px 0 30px;
+    font-size: clamp(3.4rem, 7vw, 6.4rem);
+    line-height: 0.96;
+    letter-spacing: -0.07em;
+  }
+
+  h1 span {
+    display: block;
+    color: transparent;
+    background: linear-gradient(100deg, #55a5ff, #5eead4);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .about-intro,
+  .about-copy > p:not(.section-label) {
+    max-width: 760px;
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+    line-height: 1.85;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+  }
+
+  .about-actions {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .profile-card {
+    padding: 34px;
+    border: 1px solid rgba(85, 165, 255, 0.25);
+    border-radius: 24px;
+    background:
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(39, 136, 255, 0.16),
+        transparent 40%
+      ),
+      rgba(11, 18, 32, 0.86);
+    box-shadow: 0 35px 100px rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-header {
+    color: #9de7c7;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.85);
+  }
+
+  .profile-card h2 {
+    margin: 24px 0 12px;
+    font-size: 2.2rem;
+    letter-spacing: -0.045em;
+  }
+
+  .profile-card > p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  dl {
+    margin: 30px 0 0;
+  }
+
+  dl div {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  dl div:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  dd {
+    margin: 6px 0 0;
+    color: #d9e4f2;
+    font-size: 0.92rem;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 440px);
+    align-items: end;
+    gap: 60px;
+  }
+
+  .principles-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .principle-card {
+    min-height: 280px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(11, 18, 32, 0.68);
+  }
+
+  .principle-card > span {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.76rem;
+  }
+
+  .principle-card h3 {
+    margin: 52px 0 14px;
+    font-size: 1.5rem;
+    letter-spacing: -0.035em;
+  }
+
+  .principle-card p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  .experience-section {
+    background: rgba(5, 8, 22, 0.48);
+  }
+
+  .experience-list {
+    margin-top: 65px;
+    border-top: 1px solid #18283d;
+  }
+
+  .experience-item {
+    padding: 34px 0;
+    border-bottom: 1px solid #18283d;
+    display: grid;
+    grid-template-columns: 210px 280px 1fr;
+    gap: 35px;
+  }
+
+  .experience-period {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .experience-main h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .experience-main h4 {
+    margin: 7px 0 0;
+    color: var(--accent);
+    font-size: 0.88rem;
+  }
+
+  .experience-item > p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  .skills-grid {
+    margin-top: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .skills-grid span {
+    padding: 12px 16px;
+    border: 1px solid #26374e;
+    border-radius: 999px;
+    color: #c9d5e4;
+    background: rgba(11, 18, 32, 0.75);
+    font-size: 0.88rem;
+  }
+
+  .future {
+    margin-block: 70px 110px;
+    padding: 60px;
+    border: 1px solid rgba(85, 165, 255, 0.22);
+    border-radius: 28px;
+    background:
+      linear-gradient(
+        120deg,
+        rgba(39, 136, 255, 0.12),
+        rgba(6, 182, 212, 0.04)
+      ),
+      var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+  }
+
+  .future h2 {
+    max-width: 820px;
+    margin: 14px 0 18px;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+  }
+
+  .future p:not(.section-label) {
+    max-width: 760px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 950px) {
+    .about-hero {
+      grid-template-columns: 1fr;
+      gap: 55px;
+    }
+
+    .profile-card {
+      max-width: 650px;
+    }
+
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-item {
+      grid-template-columns: 180px 1fr;
+    }
+
+    .experience-item > p {
+      grid-column: 2;
+    }
+
+    .future {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .about-hero {
+      min-height: auto;
+      padding-block: 75px;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 15vw, 4.8rem);
+    }
+
+    .section-heading {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .experience-item {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .experience-item > p {
+      grid-column: auto;
+    }
+
+    .future {
+      padding: 35px 24px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .about-actions {
+      flex-direction: column;
+    }
+
+    .profile-card {
+      padding: 25px 20px;
+    }
+  }
+</style>
