@@ -1,0 +1,172 @@
+---
+const contacts = [
+  {
+    title: "Email",
+    value: "pyuish38@gmail.com", // Change if needed
+    href: "mailto:pyuish38@gmail.com",
+  },
+  {
+    title: "GitHub",
+    value: "github.com/PraveenK1618",
+    href: "https://github.com/PraveenK1618",
+  },
+  {
+    title: "LinkedIn",
+    value: "Praveen Kumar",
+    href: "https://www.linkedin.com/in/praveen--kumar-/",
+  },
+  {
+    title: "Resume",
+    value: "Download Resume",
+    href: "/PRAVEEN_KUMAR_ECE_RESUME.pdf",
+  },
+];
+---
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <p class="section-label">Let's Connect</p>
+
+    <h2>
+      Building products,
+      <span>one problem at a time.</span>
+    </h2>
+
+    <p class="intro">
+      I'm currently looking for opportunities in Embedded Systems,
+      Semiconductor, Software Engineering and Product Development.
+      If you're working on something meaningful,
+      I'd love to hear about it.
+    </p>
+
+    <div class="contact-grid">
+      {
+        contacts.map((item) => (
+          <a
+            href={item.href}
+            class="contact-card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{item.title}</span>
+
+            <h3>{item.value}</h3>
+
+            <p>
+              Open →
+            </p>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="availability">
+      <span class="dot"></span>
+
+      Open to
+
+      <strong>
+        Full-time • Internships • Engineering Collaborations
+      </strong>
+    </div>
+  </div>
+</section>
+
+<style>
+.contact-section{
+padding:120px 0;
+border-top:1px solid var(--border);
+background:rgba(5,8,22,.45);
+}
+
+.contact-section h2{
+font-size:clamp(2.8rem,6vw,5rem);
+line-height:.95;
+letter-spacing:-.06em;
+margin:18px 0 28px;
+}
+
+.contact-section h2 span{
+display:block;
+color:transparent;
+background:linear-gradient(90deg,#55a5ff,#5eead4);
+-webkit-background-clip:text;
+background-clip:text;
+}
+
+.intro{
+max-width:720px;
+color:var(--text-secondary);
+font-size:1.1rem;
+line-height:1.9;
+margin-bottom:60px;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+
+.contact-card{
+padding:28px;
+border:1px solid var(--border);
+border-radius:20px;
+background:rgba(11,18,32,.75);
+transition:.25s;
+}
+
+.contact-card:hover{
+transform:translateY(-6px);
+border-color:#55a5ff;
+}
+
+.contact-card span{
+font-size:.8rem;
+color:var(--text-muted);
+}
+
+.contact-card h3{
+margin:20px 0;
+font-size:1.45rem;
+word-break:break-word;
+}
+
+.contact-card p{
+color:#55a5ff;
+font-weight:700;
+}
+
+.availability{
+margin-top:50px;
+display:flex;
+align-items:center;
+gap:12px;
+font-size:.95rem;
+color:var(--text-secondary);
+}
+
+.dot{
+width:10px;
+height:10px;
+background:#22c55e;
+border-radius:50%;
+box-shadow:0 0 15px #22c55e;
+}
+
+@media(max-width:700px){
+
+.contact-grid{
+grid-template-columns:1fr;
+}
+
+.contact-section{
+padding:80px 0;
+}
+
+.contact-section h2{
+font-size:3rem;
+}
+
+}
+</style>
