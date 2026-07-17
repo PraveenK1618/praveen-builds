@@ -69,6 +69,21 @@ const socialImageURL = new URL(image, Astro.site);
     <meta
   name="google-site-verification"
   content="w_v7pFezgL-i1B6krAOPBWjyNyKiejwu4x_yYukMgQg" />
+
+  <!-- Google tag (gtag.js) -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-DMLXW83LE9"
+></script>
+
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-DMLXW83LE9');
+</script>
   </head>
 
   <body>
